@@ -13,6 +13,11 @@
   "author": "David Edwards",
   "license": "MIT",
   "devDependencies": {
+    "babel-jest": "^19.0.0",
+    "babel-preset-es2015": "^6.24.1",
     "jest": "^19.0.2"
+  },
+  "dependencies": {
+    "lodash": "^4.17.4"
   }
 }
