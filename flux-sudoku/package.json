@@ -1,0 +1,18 @@
+{
+  "name": "flux-sudoku",
+  "version": "1.0.0",
+  "description": "Core engine for the game of sudoku, built in the Flux pattern",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [
+    "sudoku",
+    "flux"
+  ],
+  "author": "David Edwards",
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^19.0.2"
+  }
+}
