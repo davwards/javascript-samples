@@ -4,7 +4,7 @@
   "description": "Core engine for the game of sudoku, built in the Flux pattern",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest --watch"
   },
   "keywords": [
     "sudoku",
