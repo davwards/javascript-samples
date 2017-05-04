@@ -14,14 +14,11 @@ export default function Sudoku(puzzleGenerator) {
     initialize: Initialize(store, puzzleGenerator),
 
     makeMove: ({row, column, value}) => {
-      store.update({
-        type: 'MAKE_MOVE',
-        row: row,
-        column: column,
-        value: value
-      })
+      store.update({ type: 'MAKE_MOVE', row: row, column: column, value: value })
     },
 
-    getState: () => store.getState()
-  }
+    subscribe: store.subscribe,
+
+    getState: store.getState
+  };
 }
