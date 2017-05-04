@@ -1,9 +1,10 @@
 import Initialize from './action-creators/initialize';
 import createStore from './flux-store';
-import stateChanges from './state-changes';
+import * as stateChanges from './state-changes';
 
 const initialState = {
-  loadingPuzzle: false
+  loadingPuzzle: false,
+  solved: false
 }
 
 export default function Sudoku(puzzleGenerator) {
