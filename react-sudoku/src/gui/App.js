@@ -3,16 +3,20 @@ import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = props.sudoku.getState();
+  }
+
+  startButtonClicked() {
+    this.props.sudoku.initialize();
+  }
+
   render() {
-    return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/gui/App.js</code> and save to reload.
-        </p>
+    return (<div>
+        { this.state.puzzle && <div role="grid"></div> }
+        { this.state.loadingPuzzle && <p>LOADING PUZZLE</p> }
+        { this.state.loadingPuzzle || <button onClick={this.startButtonClicked.bind(this)}>START</button> }
       </div>
     );
   }
