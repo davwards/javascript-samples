@@ -1,5 +1,5 @@
-import Initialize from '../src/action-creators/initialize';
-import FakePromise from '../__fakes__/fake-promise';
+import Initialize from '../../src/action-creators/initialize';
+import FakePromise from '../../__fakes__/fake-promise';
 
 describe('initialize action creator', () => {
   let store, promisedPuzzle, initialize;

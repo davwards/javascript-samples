@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import SudokuGrid from '../src/gui/sudoku-grid';
+import Grid from '../src/gui/Grid';
 import { blank, filled, given, invalid } from '../__test-support__/cell-builders';
 import { random, times } from 'lodash';
 
 const DOM_ROOT_SELECTOR = "root";
 
-describe('SudokuGrid component', () => {
+describe('Grid component', () => {
   beforeEach(prepareDom);
 
   it('displays each cell in the grid', () => {
@@ -36,7 +36,7 @@ describe('SudokuGrid component', () => {
 
   function renderApp(grid) {
     ReactDOM.render(
-      <SudokuGrid grid={grid} />,
+      <Grid grid={grid} />,
       document.getElementById(DOM_ROOT_SELECTOR)
     );
   }

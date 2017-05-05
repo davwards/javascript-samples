@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Grid from './sudoku-grid';
+import Grid from './Grid';
 
 class App extends Component {
   constructor(props) {

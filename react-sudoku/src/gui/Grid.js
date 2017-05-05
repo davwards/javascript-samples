@@ -1,6 +1,6 @@
 import React from 'react';
 import { range, merge } from 'lodash';
-import Cell from './cell';
+import Cell from './Cell';
 
 const nineOf = (fn) => range(9).map(fn);
 
