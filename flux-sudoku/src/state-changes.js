@@ -35,6 +35,8 @@ function cellsWithValue(cells, value) {
 }
 
 function validateCell(puzzle, row, column) {
+  if(puzzle[row][column].value === undefined) return;
+
   const areas = [
     puzzleRow(puzzle, row),
     puzzleColumn(puzzle, column),

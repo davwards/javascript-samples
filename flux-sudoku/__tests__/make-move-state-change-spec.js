@@ -145,6 +145,38 @@ describe('MAKE_MOVE state change', () => {
         valid: false
       });
     });
+
+    it('leaves unaffected cells marked as valid', () => {
+      const state = {
+        puzzle: [
+          [blank(), blank(), blank(), filled(1), blank(), blank(), blank(), blank(), blank()],
+          [blank(), blank(), blank(), blank(), blank(), blank(), blank(), blank(), blank()],
+          [blank(), blank(), blank(), blank(), blank(), blank(), blank(), blank(), blank()],
+          [blank(), blank(), blank(), blank(), blank(), blank(), blank(), blank(), blank()],
+          [blank(), blank(), blank(), blank(), blank(), blank(), blank(), blank(), blank()],
+          [blank(), blank(), blank(), blank(), blank(), blank(), blank(), blank(), blank()],
+          [blank(), blank(), blank(), blank(), blank(), blank(), blank(), blank(), blank()],
+          [blank(), blank(), blank(), blank(), blank(), blank(), blank(), blank(), blank()],
+          [blank(), blank(), blank(), blank(), blank(), blank(), blank(), blank(), blank()],
+        ]
+      };
+
+      const action = {
+        type: 'MAKE_MOVE',
+        row: 0,
+        column: 0,
+        value: 1
+      };
+
+      MAKE_MOVE(state, action);
+
+      expect(state.puzzle[0][1]).toEqual({
+        value: undefined,
+        given: false,
+        valid: true
+      });
+
+    });
   });
 
   describe('on a space with a conflict in the column', () => {

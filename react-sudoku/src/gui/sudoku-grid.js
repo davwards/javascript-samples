@@ -1,19 +1,34 @@
 import React from 'react';
-import { range } from 'lodash';
+import { range, merge } from 'lodash';
 import Cell from './cell';
 
-function nineOf(fn) {
-  return range(9).map(fn);
-}
+const nineOf = (fn) => range(9).map(fn);
 
-const rowOfCells = (grid) => (row) =>
-  <div role="row" key={'row-' + row}>
-    { nineOf(cell(grid, row)) }
-  </div>;
+const makeMoveHandlerForCell = (row, column, makeMove) => (value) =>
+  makeMove({row, column, value});
 
-const cell = (grid, row) => (column) =>
-  <Cell key={'cell-' + row + '-' + column} data={grid[row][column]}/>
+const rowStyles = {
+  2: { borderBottom: 'solid black 2px' },
+  5: { borderBottom: 'solid black 2px' },
+};
 
-export default (props) => <div>
-  { nineOf(rowOfCells(props.grid)) }
-</div>
+const columnStyles = {
+  2: { borderRight: 'solid black 2px' },
+  5: { borderRight: 'solid black 2px' },
+};
+
+export default (props) => <table role='grid' style={{width: 'auto', borderCollapse: 'collapse'}}><tbody>
+  { nineOf(row =>
+    <tr role="row" key={'row-' + row}>
+      { nineOf(column =>
+        <Cell
+          key={'cell-' + row + '-' + column}
+          data={props.grid[row][column]}
+          style={merge({}, columnStyles[column], rowStyles[row])}
+          makeMove={makeMoveHandlerForCell(row, column, props.makeMove)}
+        />
+      ) }
+    </tr>
+  ) }
+</tbody></table>
+

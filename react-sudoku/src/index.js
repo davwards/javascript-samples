@@ -1,9 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './gui/App';
-import './gui/index.css';
+import { Sudoku, FakePuzzleGenerator } from 'flux-sudoku';
+
+const sudoku = Sudoku(new FakePuzzleGenerator());
 
 ReactDOM.render(
-  <App />,
+  <App sudoku={sudoku}/>,
   document.getElementById('root')
 );

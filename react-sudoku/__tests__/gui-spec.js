@@ -8,30 +8,48 @@ const DOM_ROOT_SELECTOR = 'root';
 describe('Sudoku gui', () => {
   beforeEach(prepareDom);
 
+  let sudoku, sudokuState;
+
+  beforeEach(() => {
+    sudokuState = {
+      puzzle: undefined
+    };
+
+    sudoku = {
+      getState: () => sudokuState,
+      initialize: jest.fn(),
+      makeMove: jest.fn(),
+      subscribe: jest.fn()
+    };
+  });
+
+  it('subscribes to updates from sudoku', () => {
+    sudokuState.loadingPuzzle = false;
+    renderApp(sudoku);
+
+    expect(sudoku.subscribe).toHaveBeenCalled();
+
+    expect(page()).not.toContain("LOADING PUZZLE");
+    sudokuState.loadingPuzzle = true;
+    sudoku.subscribe.mock.calls[0][0]();
+    expect(page()).toContain("LOADING PUZZLE");
+  });
+
   describe('when the sudoku engine does not contain a puzzle', () => {
     it('shows a START button', () => {
-      renderApp({
-        getState: () => ({ puzzle: undefined })
-      });
+      renderApp(sudoku);
 
       expect(page()).toContain("START");
     });
 
     it('does not display a puzzle', () => {
-      renderApp({
-        getState: () => ({ puzzle: undefined })
-      });
+      renderApp(sudoku);
 
       expect(document.querySelector('[role="grid"]')).toBe(null);
     });
 
     describe('and the start button is clicked', () => {
       it('calls sudoku.initialize', () => {
-        let sudoku = {
-          getState: () => ({ puzzle: undefined }),
-          initialize: jest.fn()
-        }
-
         renderApp(sudoku);
         clickStartButton();
         expect(sudoku.initialize).toHaveBeenCalled();
@@ -41,28 +59,33 @@ describe('Sudoku gui', () => {
 
   describe('when the sudoku engine contains a puzzle', () => {
     it('shows the puzzle', () => {
-      renderApp({
-        getState: () => ({ puzzle: samplePuzzle(), loadingPuzzle: false })
-      });
+      sudokuState.loadingPuzzle = false;
+      sudokuState.puzzle = samplePuzzle();
+      renderApp(sudoku);
 
       expect(document.querySelector('[role="grid"]')).not.toBe(null);
     });
-  });
 
+    it('does not show a START button', () => {
+      sudokuState.loadingPuzzle = false;
+      sudokuState.puzzle = samplePuzzle();
+      renderApp(sudoku);
+
+      expect(page()).not.toContain("START");
+    });
+  });
 
   describe('when the sudoku engine is loading the puzzle', () => {
     it('shows a LOADING message', () => {
-      renderApp({
-        getState: () => ({ loadingPuzzle: true })
-      });
+      sudokuState.loadingPuzzle = true;
+      renderApp(sudoku);
 
       expect(page()).toContain("LOADING PUZZLE");
     });
 
     it('does not show a START button', () => {
-      renderApp({
-        getState: () => ({ loadingPuzzle: true })
-      });
+      sudokuState.loadingPuzzle = true;
+      renderApp(sudoku);
 
       expect(page()).not.toContain("START");
     });
@@ -70,11 +93,23 @@ describe('Sudoku gui', () => {
 
   describe('when the sudoku engine is not loading the puzzle', () => {
     it('shows a LOADING message', () => {
-      renderApp({
-        getState: () => ({ loadingPuzzle: false })
-      });
+      sudokuState.loadingPuzzle = false;
+      renderApp(sudoku);
 
       expect(page()).not.toContain("LOADING PUZZLE");
+    });
+  });
+
+  describe('when a move is made', () => {
+    it('calls sudoku.makeMove', () => {
+      sudokuState.puzzle = samplePuzzle();
+      renderApp(sudoku);
+
+      const input = document.querySelector('[role="gridcell"] input');
+      input.value = '4';
+      input.dispatchEvent(new Event('input', {bubbles: true, cancelable: false}))
+
+      expect(sudoku.makeMove).toHaveBeenCalledWith({row: 0, column: 1, value: 4});
     });
   });
 

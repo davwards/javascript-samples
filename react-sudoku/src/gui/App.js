@@ -1,23 +1,42 @@
 import React, { Component } from 'react';
-import './App.css';
+import Grid from './sudoku-grid';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = props.sudoku.getState();
+    props.sudoku.subscribe(this.update.bind(this));
+  }
+
+  update() {
+    this.setState(this.props.sudoku.getState());
   }
 
   startButtonClicked() {
     this.props.sudoku.initialize();
   }
 
+  grid() {
+    return this.state.puzzle &&
+      <Grid grid={this.state.puzzle} makeMove={this.props.sudoku.makeMove}/>;
+  }
+
+  loadingMessage() {
+    return this.state.loadingPuzzle &&
+      <p>LOADING PUZZLE</p>;
+  }
+
+  startButton() {
+    return this.state.loadingPuzzle || !!this.state.puzzle ||
+      <button onClick={this.startButtonClicked.bind(this)}>START</button>;
+  }
+
   render() {
     return (<div>
-        { this.state.puzzle && <div role="grid"></div> }
-        { this.state.loadingPuzzle && <p>LOADING PUZZLE</p> }
-        { this.state.loadingPuzzle || <button onClick={this.startButtonClicked.bind(this)}>START</button> }
-      </div>
-    );
+      { this.grid() }
+      { this.loadingMessage() }
+      { this.startButton() }
+    </div>);
   }
 }
 

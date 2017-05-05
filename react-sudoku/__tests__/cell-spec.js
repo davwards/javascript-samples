@@ -48,7 +48,7 @@ describe('Cell component', () => {
   });
 
   function prepareDom() {
-    document.body.innerHTML = `<div id="${DOM_ROOT_SELECTOR}"></div>`;
+    document.body.innerHTML = `<table><tbody><tr id="${DOM_ROOT_SELECTOR}"></tr></tbody></table>`;
   }
 
   function renderWith(data, makeMove) {
