@@ -15,7 +15,7 @@ describe('SudokuGrid component', () => {
 
     expect(document.querySelectorAll('[role="gridcell"]').length).toBe(81);
 
-    times(10, () => {
+    times(20, () => {
       const row = random(8);
       const column = random(8);
       const cellOfInterest = puzzle[row][column];

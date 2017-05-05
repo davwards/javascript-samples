@@ -1,20 +1,19 @@
 import React from 'react';
 import { range } from 'lodash';
+import Cell from './cell';
 
-function nine(fn) {
+function nineOf(fn) {
   return range(9).map(fn);
 }
 
-const Cell = (props) => <div role="gridcell"> {props.data.value} </div>;
-
-const row = (grid) => (rowNumber) =>
-  <div role="row" key={'row-' + rowNumber}>
-    { nine(cell(grid, rowNumber)) }
+const rowOfCells = (grid) => (row) =>
+  <div role="row" key={'row-' + row}>
+    { nineOf(cell(grid, row)) }
   </div>;
 
-const cell = (grid, r) => (c) =>
-  <Cell key={'cell-' + r + '-' + c} data={grid[r][c]}/>
+const cell = (grid, row) => (column) =>
+  <Cell key={'cell-' + row + '-' + column} data={grid[row][column]}/>
 
 export default (props) => <div>
-  { nine(row(props.grid)) }
+  { nineOf(rowOfCells(props.grid)) }
 </div>
