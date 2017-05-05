@@ -1,5 +1,28 @@
 import { flatMap, flatten } from 'lodash';
 
+/* This file exports a collection of "state changes",
+ * functions which are named for a particular action type and
+ * describe how the state should change in response to that action type.
+ *
+ * I've put them all in this file to make them easy to import all at once,
+ * but you could also split the definitions up into separate modules
+ * and use this file as a manifest to collect them into one object.
+ *
+ * (This would let you separate the helper functions associated with
+ * particular state changes, but you'd have to remember to
+ * update the manifest whenever you added a new state change.)
+ *
+ * For simplicity, the state changes directly mutate the state
+ * rather than constructing and returning the new version.
+ * This isn't especially dangerous, since only one state change
+ * is called per update, and the state object never leaves the store;
+ * only clones of it are returned from getState().
+ *
+ * If you needed to, with minor tweaks you could have your state changes
+ * return a new copy of the state rather than mutating it.
+ * They would just be a little noisier.
+ */
+
 export const INITIALIZE = (state) => { state.loadingPuzzle = true; };
 
 export const PUZZLE_LOADED = (state, action) => {
