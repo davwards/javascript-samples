@@ -16,6 +16,15 @@ import * as stateChanges from './state-changes';
  *
  * This module also defines the initial state of the store
  * and wires it up with all of the state changes.
+ *
+ * This app is simple enough that it needs only one store.
+ * Accordingly, the dispatch function that the action creators use
+ * is just the update function for the store.
+ *
+ * If you needed more stores, you could construct them here,
+ * then create dispatch, subscribe, and getState functions
+ * that aggregate over all of the stores.
+ * At that point, it might be time for Redux!
  */
 
 const initialState = {
@@ -25,12 +34,13 @@ const initialState = {
 
 export default function Sudoku(puzzleGenerator) {
   const store = createStore(initialState, stateChanges);
+  const dispatch = store.update;
 
   return {
-    initialize: Initialize(store, puzzleGenerator),
+    initialize: Initialize(dispatch, puzzleGenerator),
 
     makeMove: ({row, column, value}) => {
-      store.update({ type: 'MAKE_MOVE', row: row, column: column, value: value })
+      dispatch({ type: 'MAKE_MOVE', row: row, column: column, value: value })
     },
 
     subscribe: store.subscribe,

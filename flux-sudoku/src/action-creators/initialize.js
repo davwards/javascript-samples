@@ -1,5 +1,11 @@
-/* This module exports a function which builds
- * the "initialize" action creator.
+/* This module exports a factory function
+ * which builds the "initialize" action creator.
+ *
+ * (Why export a factory function? It makes it really easy
+ * to unit test the action creator, because
+ * you can build it with spies and stubs!
+ * In real life, the action creator gets built by
+ * the Sudoku module.)
  *
  * An action creator is a function whose job is
  * to dispatch actions, and to do any work necessary
@@ -16,12 +22,12 @@
  * actions at the appropriate moments in the chain
  * of events to keep the application up to date.
  */
-export default (store, puzzleGenerator) =>
+export default (dispatch, puzzleGenerator) =>
   () => {
-    store.update({ type: 'INITIALIZE' });
+    dispatch({ type: 'INITIALIZE' });
 
     puzzleGenerator.generate()
-      .then(puzzle => store.update({
+      .then(puzzle => dispatch({
         type: 'PUZZLE_LOADED',
         puzzle: puzzle
       }));
