@@ -17,7 +17,7 @@ describe('Sudoku gui', () => {
 
     sudoku = {
       getState: () => sudokuState,
-      initialize: jest.fn(),
+      loadPuzzle: jest.fn(),
       makeMove: jest.fn(),
       subscribe: jest.fn()
     };
@@ -49,10 +49,10 @@ describe('Sudoku gui', () => {
     });
 
     describe('and the start button is clicked', () => {
-      it('calls sudoku.initialize', () => {
+      it('calls sudoku.loadPuzzle', () => {
         renderApp(sudoku);
         clickStartButton();
-        expect(sudoku.initialize).toHaveBeenCalled();
+        expect(sudoku.loadPuzzle).toHaveBeenCalled();
       });
     });
   });

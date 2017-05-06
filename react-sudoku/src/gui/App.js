@@ -13,7 +13,7 @@ class App extends Component {
   }
 
   startButtonClicked() {
-    this.props.sudoku.initialize();
+    this.props.sudoku.loadPuzzle();
   }
 
   grid() {

@@ -1,24 +1,24 @@
-import Initialize from '../../src/action-creators/initialize';
+import LoadPuzzle from '../../src/load-puzzle/load-puzzle-action-creator';
 import FakePromise from '../../__fakes__/fake-promise';
 
-describe('initialize action creator', () => {
-  let dispatch, promisedPuzzle, initialize;
+describe('loadPuzzle action creator', () => {
+  let dispatch, promisedPuzzle, loadPuzzle;
 
   beforeEach(() => {
     promisedPuzzle = new FakePromise();
     dispatch = jest.fn();
     const stubPuzzleGenerator = { generate: () => promisedPuzzle };
 
-    initialize = Initialize(dispatch, stubPuzzleGenerator);
+    loadPuzzle = LoadPuzzle(dispatch, stubPuzzleGenerator);
   });
 
-  it('sends an INITIALIZE action to the store', () => {
-    initialize();
-    expect(dispatch).toHaveBeenCalledWith({ type: 'INITIALIZE' });
+  it('sends a LOADING_PUZZLE action to the store', () => {
+    loadPuzzle();
+    expect(dispatch).toHaveBeenCalledWith({ type: 'LOADING_PUZZLE' });
   });
 
   it('sends a PUZZLE_LOADED action when the puzzle from the generator resolves', () => {
-    initialize();
+    loadPuzzle();
     promisedPuzzle.resolveWith('the-puzzle');
 
     expect(dispatch).toHaveBeenCalledWith({

@@ -1,4 +1,4 @@
-import createStore from '../src/flux-store';
+import createStore from '../../src/infrastructure/create-store';
 
 describe('flux store', () => {
   describe('given an action for which there is a state change', () => {

@@ -1,4 +1,4 @@
-import { MAKE_MOVE } from '../../src/state-changes';
+import MAKE_MOVE from '../../src/make-move/make-move-state-change';
 
 function blank() {
   return {value: undefined, given: false, valid: true};

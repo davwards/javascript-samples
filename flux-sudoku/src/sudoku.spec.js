@@ -9,7 +9,7 @@ test('Playing a game of sudoku', () => {
   expect(sudoku.getState().loadingPuzzle).toBe(false);
   expect(sudoku.getState().solved).toBe(false);
 
-  sudoku.initialize();
+  sudoku.loadPuzzle();
   expect(sudoku.getState().loadingPuzzle).toBe(true);
   expect(sudoku.getState().puzzle).toBe(undefined);
 
