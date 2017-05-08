@@ -54,12 +54,9 @@ export default function Sudoku(puzzleGenerator) {
 
   return {
     loadPuzzle: LoadPuzzle(dispatch, puzzleGenerator),
-
-    makeMove: ({row, column, value}) =>
-      dispatch({ type: 'MAKE_MOVE', row, column, value }),
+    makeMove: ({row, column, value}) => dispatch({ type: 'MAKE_MOVE', row, column, value }),
 
     subscribe: store.subscribe,
-
     getState: store.getState
   };
 }
