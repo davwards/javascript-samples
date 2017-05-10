@@ -1,6 +1,6 @@
 # Javascript Samples
 
-This project provides a reference implementation of various useful Javascript patterns,
+This project provides a reference implementation of useful Javascript patterns,
 including an approach to multi-module project structure and
 the Flux pattern for state management.
 
@@ -22,8 +22,8 @@ Typically, modules pulled in via NPM are expected to already be in a "built" for
 You can use Webpack to package your library modules this way,
 but including the following in your `webpack.config.js` is critical:
 
+*(snippet from `flux-sudoku/webpack.config.js`)*
 ```javascript
-//...
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
@@ -39,8 +39,9 @@ but other than that its value is effectively arbitrary (it just needs to exist).
 Setting `libraryTarget` to `umd` will allow consumers to import it
 the same way they would import other NPM modules, e.g.:
 
+*(snippet from `react-sudoku/src/index.js`)*
 ```javascript
-import { Sudoku } from 'flux-sudoku';
+import { Sudoku, FakePuzzleGenerator } from 'flux-sudoku';
 ```
 
 If you omit `libraryTarget: 'umd'`, you will run into some pretty inscrutable errors
@@ -50,6 +51,7 @@ from your library, all imported variables will be `undefined`.
 
 Finally, the `main` path specified in your `package.json` must correspond to Webpack's output:
 
+*(snippet from `flux-sudoku/package.json`)*
 ```json
   "main": "dist/bundle.js",
 ```
@@ -58,6 +60,7 @@ Finally, the `main` path specified in your `package.json` must correspond to Web
 
 The `react-sudoku` module declares its dependency on `flux-sudoku` as follows:
 
+*(snippet from `react-sudoku/package.json`)*
 ```json
     "flux-sudoku": "file:../flux-sudoku",
 ```
@@ -72,8 +75,9 @@ Therefore, changes to `flux-sudoku` will not immediately be available to `react-
 With a small amount of setup, you can create a pretty slick multi-module workflow.
 We need to solve the following problems:
 
-- As you make changes to library modules (like `flux-sudoku`), you want the compiled slug to update automatically.
-- As the compiled slugs of library modules change, you want those changes to
+- As you make changes to library modules (like `flux-sudoku`), you want
+  the `bundle.js` file created by Webpack to update automatically.
+- As the `bundle.js` files of library modules change, you want those changes to
   immediately be available to the modules consuming them (like `react-sudoku`).
 
 To accomplish this, do the following:
@@ -139,7 +143,7 @@ It also notifies a set of subscribed callbacks any time the state changes.
 Apart from the specific state changes made for a given action, the store is actually completely generic.
 (In fact, a generic store implementation is one of the main things that libraries like Redux give you.)
 Check out `flux-sudoku`'s store implementation in `flux-sudoku/src/infrastructure/create-store.js`.
-The state change functions themselves, being application-specific, are located in `sudoku.js`.
+The state change functions themselves, being application-specific, are located in `flux-sudoku/sudoku.js`.
 
 ### The Action Creators
 
