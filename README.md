@@ -24,9 +24,9 @@ Points of interest include:
   of the Flux pattern in its core module.
   You can find more details in `flux-sudoku/README.md`.
 
-- **Testing patterns for avoiding tightly-coupled tests in a Flux architecture**
+- **Testing patterns for avoiding tightly coupled tests in a Flux architecture**
 
-  Flux apps often suffer from tests that are too-tightly-coupled
+  Flux apps often suffer from tests that are too tightly coupled
   to the structure of the system.
   But it doesn't have to be this way!
   You can find more details in `flux-sudoku/README.md`.
