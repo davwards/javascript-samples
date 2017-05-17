@@ -38,6 +38,8 @@ Points of interest include:
   This project contains the following modules:
   - `flux-sudoku`, which contains the high-level policy for the game of Sudoku
   - `react-sudoku`, which contains a React-based GUI for the game and depends on `flux-sudoku`
+  - `local-puzzle-generator`, which contains a `flux-sudoku`-compatible adapter for
+    a third-party sudoku generator from npmjs.
 
   Getting a project structure like this to work tends to require some nuance
   in any build system, but with NPM this actually works out pretty well.
@@ -52,7 +54,8 @@ The modules in the project come in two flavors:
   rather, they're intended to be imported into other modules.
 - **Deployable** modules depend on library modules and can be deployed as standalone apps.
 
-`flux-sudoku` is a library module, while `react-sudoku` is a deployable module.
+`flux-sudoku` and `local-puzzle-generator` are library modules,
+while `react-sudoku` is a deployable module.
 
 Here are the tricks that make the build work:
 
@@ -83,7 +86,7 @@ the same way they would import other NPM modules, e.g.:
 
 *(snippet from `react-sudoku/src/index.js`)*
 ```javascript
-import { Sudoku, FakePuzzleGenerator } from 'flux-sudoku';
+import { Sudoku } from 'flux-sudoku';
 ```
 
 If you omit `libraryTarget: 'umd'`, you will run into some pretty inscrutable errors

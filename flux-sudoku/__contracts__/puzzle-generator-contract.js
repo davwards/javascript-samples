@@ -1,22 +1,22 @@
 import { uniq, range, flatMap } from 'lodash';
 
-expect.extend({
-  toContainDuplicates(collection) {
-    if(collection.length > uniq(collection).length) {
-      return {
-        pass: true,
-        message: `expected collection ${collection} not to contain duplicate values`
-      };
-    } else {
-      return {
-        pass: false,
-        message: `expected collection ${collection} to contain duplicate values`
-      };
-    }
-  }
-})
-
 export default function itBehavesLikeAPuzzleGenerator(getGenerator) {
+  expect.extend({
+    toContainDuplicates(collection) {
+      if(collection.length > uniq(collection).length) {
+        return {
+          pass: true,
+          message: `expected collection ${collection} not to contain duplicate values`
+        };
+      } else {
+        return {
+          pass: false,
+          message: `expected collection ${collection} to contain duplicate values`
+        };
+      }
+    }
+  });
+
   let generator;
 
   beforeEach(() => {

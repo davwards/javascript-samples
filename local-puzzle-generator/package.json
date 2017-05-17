@@ -1,0 +1,25 @@
+{
+  "name": "local-puzzle-generator",
+  "version": "1.0.0",
+  "description": "Puzzle Generator implementation that uses an npm module to generate the puzzle locally",
+  "main": "dist/bundle.js",
+  "scripts": {
+    "test": "jest",
+    "build": "webpack",
+    "watch": "webpack --watch",
+    "link-local-workspace": "npm link ../flux-sudoku"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "flux-sudoku": "file:../flux-sudoku",
+    "lodash.chunk": "^4.2.0",
+    "sudoku": "0.0.2"
+  },
+  "devDependencies": {
+    "babel-jest": "^20.0.3",
+    "babel-preset-es2015": "^6.24.1",
+    "jest": "^20.0.3",
+    "webpack": "^2.5.1"
+  }
+}
