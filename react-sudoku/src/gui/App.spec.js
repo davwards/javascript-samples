@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from '../src/gui/App';
-import { blank, filled, given, invalid } from '../__test-support__/cell-builders';
+import App from './App';
+import { blank, filled, given, invalid } from '../../__test-support__/cell-builders';
 
 const DOM_ROOT_SELECTOR = 'root';
 

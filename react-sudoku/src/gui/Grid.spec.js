@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Grid from '../src/gui/Grid';
-import { blank, filled, given, invalid } from '../__test-support__/cell-builders';
+import Grid from './Grid';
+import { blank, filled, given, invalid } from '../../__test-support__/cell-builders';
 import { random, times } from 'lodash';
 
 const DOM_ROOT_SELECTOR = "root";

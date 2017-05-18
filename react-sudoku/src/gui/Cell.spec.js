@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom';
 import React from 'react';
-import Cell from '../src/gui/Cell';
+import Cell from './Cell';
 
 const DOM_ROOT_SELECTOR = 'root';
 
