@@ -10,7 +10,7 @@ presents the game of sudoku using the `flux-sudoku` library.
 2. Make sure the library modules are installed and built:
 
 ```bash
-# in the flux-sudoku directory:
+# run the following in both the flux-sudoku and local-puzzle-generator directories:
 $ npm install
 $ npm run build
 ```
