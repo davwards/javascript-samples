@@ -20,7 +20,10 @@ const initialState = {
 }
 
 const stateChanges = {
-  LOADING_PUZZLE: (state) => { state.loadingPuzzle = true; },
+  LOADING_PUZZLE: (state) => {
+    state.loadingPuzzle = true;
+    state.puzzle = undefined;
+  },
   PUZZLE_LOADED: puzzleLoaded,
   MAKE_MOVE: makeMove
 }
