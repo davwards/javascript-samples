@@ -44,7 +44,13 @@ Points of interest include:
   Getting a project structure like this to work tends to require some nuance
   in any build system, but with NPM this actually works out pretty well.
   You can find more details about the particular tricks that make it work
-  below.
+  below under "Multi-Module Project Structure".
+
+## Running the App
+
+The runnable part of the application is the `react-sudoku` module;
+you can find instructions for running it locally
+in `react-sudoku/README.md`.
 
 ## Multi-Module Project Structure
 
