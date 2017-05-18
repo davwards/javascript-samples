@@ -16,7 +16,5 @@ export default function (state, action) {
     validatePuzzle(state.puzzle);
   }
 
-  if(isSolved(state.puzzle)) {
-    state.solved = true;
-  }
+  state.solved = isSolved(state.puzzle);
 }

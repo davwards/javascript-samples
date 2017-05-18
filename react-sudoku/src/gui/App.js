@@ -26,6 +26,11 @@ class App extends Component {
       <p>LOADING PUZZLE</p>;
   }
 
+  solvedMessage() {
+    return this.state.solved &&
+      <p>SOLVED</p>;
+  }
+
   startButton() {
     return this.state.loadingPuzzle || !!this.state.puzzle ||
       <button onClick={this.startButtonClicked.bind(this)}>START</button>;
@@ -35,6 +40,7 @@ class App extends Component {
     return (<div>
       { this.grid() }
       { this.loadingMessage() }
+      { this.solvedMessage() }
       { this.startButton() }
     </div>);
   }

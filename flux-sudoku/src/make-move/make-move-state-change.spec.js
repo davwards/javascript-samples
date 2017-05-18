@@ -333,7 +333,37 @@ describe('MAKE_MOVE state change', () => {
     });
   });
 
-  describe('when all cells are filled and none are invalid', () => {
+  describe('when the puzzle was solved and becomes unsolved', () => {
+    it('marks the puzzle not solved', () => {
+      const state = {
+        puzzle: [
+          [filled(9), filled(4), filled(5), filled(2), filled(3), filled(7), filled(6), filled(8), filled(1)],
+          [filled(1), filled(2), filled(6), filled(8), filled(4), filled(9), filled(5), filled(7), filled(3)],
+          [filled(8), filled(3), filled(7), filled(1), filled(6), filled(5), filled(4), filled(2), filled(9)],
+          [filled(7), filled(6), filled(4), filled(5), filled(9), filled(8), filled(3), filled(1), filled(2)],
+          [filled(2), filled(8), filled(3), filled(4), filled(7), filled(1), filled(9), filled(5), filled(6)],
+          [filled(5), filled(1), filled(9), filled(6), filled(2), filled(3), filled(8), filled(4), filled(7)],
+          [filled(4), filled(7), filled(1), filled(3), filled(8), filled(6), filled(2), filled(9), filled(5)],
+          [filled(6), filled(5), filled(2), filled(9), filled(1), filled(4), filled(7), filled(3), filled(8)],
+          [filled(3), filled(9), filled(8), filled(7), filled(5), filled(2), filled(1), filled(6), filled(4)],
+        ],
+        solved: true,
+      };
+
+      const action = {
+        type: 'MAKE_MOVE',
+        row: 0,
+        column: 0,
+        value: undefined
+      };
+
+      MAKE_MOVE(state, action);
+
+      expect(state.solved).toBe(false);
+    })
+  });
+
+  describe('when all cells are filled and some are invalid', () => {
     it('marks the puzzle solved', () => {
       const state = {
         puzzle: [

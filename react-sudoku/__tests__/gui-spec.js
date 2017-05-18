@@ -100,6 +100,15 @@ describe('Sudoku gui', () => {
     });
   });
 
+  describe('when the puzzle is solved', () => {
+    it('shows a SOLVED message', () => {
+      sudokuState.solved = true;
+      renderApp(sudoku);
+
+      expect(page()).toContain('SOLVED');
+    });
+  });
+
   describe('when a move is made', () => {
     it('calls sudoku.makeMove', () => {
       sudokuState.puzzle = samplePuzzle();
