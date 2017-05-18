@@ -8,11 +8,15 @@ class App extends Component {
     props.sudoku.subscribe(this.update.bind(this));
   }
 
+  componentDidMount() {
+    this.props.sudoku.loadPuzzle();
+  }
+
   update() {
     this.setState(this.props.sudoku.getState());
   }
 
-  startButtonClicked() {
+  loadPuzzleButtonClicked() {
     this.props.sudoku.loadPuzzle();
   }
 
@@ -35,9 +39,9 @@ class App extends Component {
       <p>SOLVED</p>;
   }
 
-  startButton() {
-    return this.state.loadingPuzzle || !!this.state.puzzle ||
-      <button onClick={this.startButtonClicked.bind(this)}>START</button>;
+  loadPuzzleButton() {
+    return this.state.loadingPuzzle ||
+      <button onClick={this.loadPuzzleButtonClicked.bind(this)}>LOAD PUZZLE</button>;
   }
 
   render() {
@@ -45,7 +49,7 @@ class App extends Component {
       { this.grid() }
       { this.loadingMessage() }
       { this.solvedMessage() }
-      { this.startButton() }
+      { this.loadPuzzleButton() }
     </div>);
   }
 }

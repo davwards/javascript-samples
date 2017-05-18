@@ -23,6 +23,13 @@ describe('Sudoku gui', () => {
     };
   });
 
+  describe('when the component mounts', () => {
+    it('loads a puzzle', () => {
+      renderApp(sudoku);
+      expect(sudoku.loadPuzzle).toHaveBeenCalled();
+    });
+  });
+
   it('subscribes to updates from sudoku', () => {
     sudokuState.loadingPuzzle = false;
     renderApp(sudoku);
@@ -36,12 +43,6 @@ describe('Sudoku gui', () => {
   });
 
   describe('when the sudoku engine does not contain a puzzle', () => {
-    it('shows a START button', () => {
-      renderApp(sudoku);
-
-      expect(page()).toContain("START");
-    });
-
     it('does not display a puzzle', () => {
       renderApp(sudoku);
 
@@ -65,14 +66,6 @@ describe('Sudoku gui', () => {
 
       expect(document.querySelector('[role="grid"]')).not.toBe(null);
     });
-
-    it('does not show a START button', () => {
-      sudokuState.loadingPuzzle = false;
-      sudokuState.puzzle = samplePuzzle();
-      renderApp(sudoku);
-
-      expect(page()).not.toContain("START");
-    });
   });
 
   describe('when the sudoku engine is loading the puzzle', () => {
@@ -83,20 +76,27 @@ describe('Sudoku gui', () => {
       expect(page()).toContain("LOADING PUZZLE");
     });
 
-    it('does not show a START button', () => {
+    it('does not show a LOAD PUZZLE button', () => {
       sudokuState.loadingPuzzle = true;
       renderApp(sudoku);
 
-      expect(page()).not.toContain("START");
+      expect(page()).not.toContain("LOAD PUZZLE");
     });
   });
 
   describe('when the sudoku engine is not loading the puzzle', () => {
-    it('shows a LOADING message', () => {
+    it('does not show a LOADING message', () => {
       sudokuState.loadingPuzzle = false;
       renderApp(sudoku);
 
       expect(page()).not.toContain("LOADING PUZZLE");
+    });
+
+    it('shows a LOAD PUZZLE button', () => {
+      sudokuState.loadingPuzzle = false;
+      renderApp(sudoku);
+
+      expect(page()).toContain("LOAD PUZZLE");
     });
   });
 
