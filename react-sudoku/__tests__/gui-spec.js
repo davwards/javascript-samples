@@ -107,6 +107,14 @@ describe('Sudoku gui', () => {
 
       expect(page()).toContain('SOLVED');
     });
+
+    it('disables all inputs', () => {
+      sudokuState.solved = true;
+      sudokuState.puzzle = samplePuzzle();
+      renderApp(sudoku);
+
+      expect(document.querySelectorAll('input:not([disabled])').length).toBe(0);
+    });
   });
 
   describe('when a move is made', () => {

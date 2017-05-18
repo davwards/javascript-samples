@@ -45,15 +45,33 @@ describe('Cell component', () => {
         expect(makeMove).toHaveBeenCalledWith(4);
       });
     });
+
+    describe('when the puzzle is not solved', () => {
+      it('enables the input field', () => {
+        renderWith({value: undefined, given: false, valid: true}, ()=>{}, false);
+
+        const input = document.querySelector('input');
+        expect(input.disabled).toBe(false);
+      });
+    });
+
+    describe('when the puzzle is solved', () => {
+      it('disables the input field', () => {
+        renderWith({ value: undefined, given: false, valid: true}, ()=>{}, true);
+
+        const input = document.querySelector('input');
+        expect(input.disabled).toBe(true);
+      });
+    });
   });
 
   function prepareDom() {
     document.body.innerHTML = `<table><tbody><tr id="${DOM_ROOT_SELECTOR}"></tr></tbody></table>`;
   }
 
-  function renderWith(data, makeMove) {
+  function renderWith(data, makeMove, solved) {
     ReactDOM.render(
-      <Cell data={data} makeMove={makeMove} />,
+      <Cell data={data} makeMove={makeMove} solved={solved} />,
       document.getElementById(DOM_ROOT_SELECTOR)
     );
   }

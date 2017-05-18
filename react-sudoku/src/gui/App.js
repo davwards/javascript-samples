@@ -18,7 +18,11 @@ class App extends Component {
 
   grid() {
     return this.state.puzzle &&
-      <Grid grid={this.state.puzzle} makeMove={this.props.sudoku.makeMove}/>;
+      <Grid
+        grid={this.state.puzzle}
+        makeMove={this.props.sudoku.makeMove}
+        solved={this.state.solved}
+      />;
   }
 
   loadingMessage() {

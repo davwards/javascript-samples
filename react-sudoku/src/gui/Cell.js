@@ -1,8 +1,28 @@
 import React from 'react';
 import { merge } from 'lodash';
 
+const cellBackground = (valid, solved) => {
+  if(solved) {
+    return '#EFE';
+  } else if(valid) {
+    return 'white';
+  } else {
+    return '#FDD';
+  }
+}
+
+const inputBackground = (valid, solved) => {
+  if(solved) {
+    return '#CFC';
+  } else if(valid) {
+    return '#EEE';
+  } else {
+    return '#EDD';
+  }
+}
+
 const cellStyle = (props) => merge({
-  background: props.data.valid ? 'white' : '#FDD',
+  background: cellBackground(props.data.valid, props.solved),
   fontWeight: props.data.given ? 'bold' : 'normal',
   width: '50px',
   height: '50px',
@@ -12,9 +32,9 @@ const cellStyle = (props) => merge({
   padding: 0,
 }, props.style);
 
-const inputStyle = (data) => ({
+const inputStyle = (data, solved) => ({
+  background: inputBackground(data.valid, solved),
   border: 'none',
-  background: data.valid ? '#EEE' : '#EDD',
   fontSize: '1em',
   width: '50px',
   height: '100%',
@@ -27,14 +47,15 @@ const inputStyle = (data) => ({
 const handleChange = (handler) => (event) =>
   handler(parseInt(event.target.value, 10));
 
-const inputField = (data, makeMove) =>
+const inputField = (data, makeMove, solved) =>
   <input
+    disabled={solved}
     type='number'
     min='1'
     max='9'
     value={data.value || ''}
     onChange={handleChange(makeMove)}
-    style={inputStyle(data)}
+    style={inputStyle(data, solved)}
   />
 
 export default (props) =>
@@ -42,6 +63,6 @@ export default (props) =>
     {
       props.data.given
         ? props.data.value
-        : inputField(props.data, props.makeMove)
+        : inputField(props.data, props.makeMove, props.solved)
     }
   </td>;

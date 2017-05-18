@@ -26,6 +26,7 @@ export default (props) => <table role='grid' style={{width: 'auto', borderCollap
           data={props.grid[row][column]}
           style={merge({}, columnStyles[column], rowStyles[row])}
           makeMove={makeMoveHandlerForCell(row, column, props.makeMove)}
+          solved={props.solved}
         />
       ) }
     </tr>
