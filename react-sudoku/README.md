@@ -7,10 +7,11 @@ presents the game of sudoku using the `flux-sudoku` library.
 
 1. Make sure you have node >= v6 on your machine.
 
-2. Make sure the library modules are built:
+2. Make sure the library modules are installed and built:
 
 ```bash
 # in the flux-sudoku directory:
+$ npm install
 $ npm run build
 ```
 
