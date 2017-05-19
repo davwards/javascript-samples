@@ -15,9 +15,8 @@ Points of interest include:
   Often, projects that want to use the Flux pattern do so via a library like Redux.
   However, the Flux pattern is very lightweight, so you can get a long way
   by just creating a simple Flux implementation yourself.
-
-  Later on, the additional tooling Redux provides may become valuable enough
-  to offset the additional complexity it entails. At that point,
+  If the additional tooling Redux provides becomes valuable enough
+  to offset the additional complexity it entails later on,
   transitioning to it isn't hard, since it's all just Flux anyway.
 
   This project features a very simple, library-free implementation
@@ -39,7 +38,7 @@ Points of interest include:
   - `flux-sudoku`, which contains the high-level policy for the game of Sudoku
   - `react-sudoku`, which contains a React-based GUI for the game and depends on `flux-sudoku`
   - `local-puzzle-generator`, which contains a `flux-sudoku`-compatible adapter for
-    a third-party sudoku generator from npmjs.
+    a third-party sudoku generator.
 
   Getting a project structure like this to work tends to require some nuance
   in any build system, but with NPM this actually works out pretty well.
