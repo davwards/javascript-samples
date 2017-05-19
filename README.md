@@ -45,6 +45,19 @@ Points of interest include:
   You can find more details about the particular tricks that make it work
   below under "Multi-Module Project Structure".
 
+- **Contract tests in Jest**
+
+  Contract tests are a valuable way to safeguard integration between modules,
+  and to guide the implementation of new adapter implementations.
+
+  In this project, the `flux-sudoku` module defines a contract test
+  for "puzzle generators" and exports this contract as part of its public API.
+  The `local-puzzle-generator` module then imports the contract test
+  and uses it in its test suite, ensuring that its generator implementation
+  has all the behavior necessary to integrate with `flux-sudoku`.
+
+  See: `local-puzzle-generator/src/local-puzzle-generator.spec.js`
+
 ## Running the App
 
 The runnable part of the application is the `react-sudoku` module;
